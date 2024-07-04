@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Booking Details</title>
+    <style>
+        body {
+            font-family: Abril Fatface, sans-serif;
+            font-size:medium;
+            color: #323232;
+            background: linear-gradient(135deg, #f24078 40%, #fc894d)no-repeat center center fixed;
+            height: 100%;
+        }
+        header{
+            color: #ffffff;
+            width: 100%;
+            margin: 0;
+            text-align: center;
+        }
+        p{
+            justify-content:space-around;
+            font-family:'Times New Roman', Times, serif;
+            text-align: center;
+            color: #f2f2f2;
+        }
+        h1 {
+            font-family: "Abril Fatface", serif;
+            font-weight: 400;
+            font-style:oblique;
+            font-size: 30px;
+            justify-content: center;
+            text-align: center;
+        }
+        table {
+            width: 50%;
+            margin: auto;
+            align-items: center;
+            border-collapse: collapse;
+            background-color:rgb(255, 255, 255);
+            opacity: 0.93;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #000;
+            text-align: left;
+            margin: auto;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td {
+            background-color: #fff;
+            
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Blue Bus</h1>
+    </header>
+
+    <p  > Your Journey, Just a Click Away! Book Bus Tickets Effortlessly with Our Easy-to-Use App.</p>
+
+<h1 style="color:#000000;">Booking Details</h1>
+<table>
+    <tr>
+        <th>Booking ID</th>
+        <td th:text="${booking.bookingId}"></td>
+    </tr>
+    <tr>
+        <th>Bus Name</th>
+        <td th:text="${booking.busEntity.busName}"></td>
+    </tr>
+    <tr>
+        <th>From</th>
+        <td th:text="${booking.busEntity.from}"></td>
+    </tr>
+    <tr>
+        <th>To</th>
+        <td th:text="${booking.busEntity.to}"></td>
+    </tr>
+    <tr>
+        <th>Date of Journey</th>
+        <td th:text="${booking.busEntity.checkingDate}"></td>
+    </tr>
+    <tr>
+        <th>Departure Time</th>
+        <td th:text="${booking.busEntity.departureTime}"></td>
+    </tr>
+    <tr>
+        <th>Arrival Time</th>
+        <td th:text="${booking.busEntity.arrivalTime}"></td>
+    </tr>
+    <tr>
+        <th>Ticket Fare Per Head</th>
+        <td th:text="${booking.busEntity.ticketFar}"></td>
+    </tr>
+</table>
+
+<p style="margin-bottom: 210px;">Thanks for booking with us, Have a great journey..!!</p>
+
+<footer>
+    <p style="font-family: 'Times New Roman', Times, serif; text-align: center;">&copy; 2024 Blue Bus. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+<head>
+    <title>View Buses</title>
+    <meta name="_csrf" content="_csrf.token"/>
+    <meta name="_csrf_header" content="_csrf.headerName"/>
+    <style>
+        body {
+            font-family: Abril Fatface, sans-serif;
+            font-size:medium;
+            color: #323232;
+            background: linear-gradient(135deg, #f24078 40%, #fc894d)no-repeat center center fixed;
+        }
+        h2{
+            margin: auto;
+            text-align: center;
+            margin-bottom: 20px;
+            color: rgb(255, 255, 255);
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color:transparent;
+            opacity: 0.9;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .alert {
+            padding: 15px;
+    
+            border: 1px solid transparent;
+            border-radius: 4px;
+            margin: auto;
+
+        }
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            max-width: 500px;
+            margin-bottom: 10px;
+        }
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            max-width: 500px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f2f2f2;
+        }
+        
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .actions a {
+            text-decoration: none;
+            padding: 5px 10px;
+            color: white;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        .actions a.edit {
+            background-color: #28a745;
+        }
+        .actions button.delete {
+            padding:7px 10px;
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+         .button {
+            background-color: #fff;
+            position: absolute;
+            top: 20px;
+            right: 10%;
+            border: 0 solid #e2e8f0;
+            border-radius: 1.5rem;
+            box-sizing: border-box;
+            color: #0d172a;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1;
+            padding: 1rem 1.6rem;
+            text-align: center;
+            text-decoration: none #0d172a solid;
+            text-decoration-thickness: auto;
+            transition: all .1s cubic-bezier(.4, 0, .2, 1);
+            box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+        .button:hover{
+            background-color: #1e293b;
+            color: #fff;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <h2>View Buses</h2>
+    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+    <table>
+        <thead>
+        <tr>
+            <th>Bus ID</th>
+            <th>Bus Name</th>
+            <th>From Departure</th>
+            <th>To Arrival</th>
+            <th>Ticket Fare</th>
+            <th>Checking Date</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bus : ${bus}">
+            <td th:text="${bus.busId}"></td>
+            <td th:text="${bus.busName}"></td>
+            <td th:text="${bus.from}"></td>
+            <td th:text="${bus.to}"></td>
+            <td th:text="${bus.ticketFar}"></td>
+            <td th:text="${bus.checkingDate}"></td>
+            <td th:text="${bus.departureTime}"></td>
+            <td th:text="${bus.arrivalTime}"></td>
+            <td class="actions">
+                <a th:href="@{/updateByBus(busId=${bus.busId})}" class="edit">Edit</a>
+                <form th:action="@{/delete/{serialNo}(serialNo=${bus.serialNo})}" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit" class="delete">Delete</button>
+                </form>
+
+
+
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/admin" class="button">Home</a>
+</div>
+</body>
+</html>

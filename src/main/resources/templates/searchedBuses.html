@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Available Buses</title>
+    <style>
+        body {
+            font-family: Abril Fatface, sans-serif;
+            font-size:medium;
+            color: #323232;
+            background: linear-gradient(135deg, #f24078 40%, #fc894d)no-repeat center center fixed;
+          color: white;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+        }
+        h1 {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            margin: 0;
+        }
+        table {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+        }
+        input[type="submit"] {
+            background-image: linear-gradient(135deg, #f24078 40%, #fc894d);
+            color: #fff;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background: linear-gradient(135deg, #fc894d  40%,#f24078);
+        }
+        .home-button {
+            background-color: #fff;
+            border: 0 solid #e2e8f0;
+            border-radius: 1.5rem;
+            box-sizing: border-box;
+            color: #0d172a;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1;
+            padding: 1rem 1.6rem;
+            text-align: center;
+            text-decoration: none #0d172a solid;
+            text-decoration-thickness: auto;
+            transition: all .1s cubic-bezier(.4, 0, .2, 1);
+            box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            display: block;
+            width: 150px;
+            padding: 10px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .home-button:hover {
+            background-color: #1e293b;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<h1>Available Buses</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Bus Name</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Date of Journey</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Ticket Fare</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bus : ${buses}">
+        <td th:text="${bus.busName}"></td>
+        <td th:text="${bus.from}"></td>
+        <td th:text="${bus.to}"></td>
+        <td th:text="${bus.checkingDate}"></td>
+        <td th:text="${bus.departureTime}"></td>
+        <td th:text="${bus.arrivalTime}"></td>
+        <td th:text="${bus.ticketFar}"></td>
+        <td>
+            <form th:action="@{/bookBus/{busId}(busId=${bus.busId})}" method="get">
+                <input type="submit" value="Book Now"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/user" class="home-button">Back to Home</a>
+</body>
+</html>

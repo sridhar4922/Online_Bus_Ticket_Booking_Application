@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Abril Fatface, sans-serif;
+            font-size:medium;
+            color: #323232;
+            background: linear-gradient(135deg, #f24078 40%, #fc894d)no-repeat center center fixed;
+          color: white;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+        }
+        p{
+            margin: auto;
+            text-align: center;
+            justify-content: center;
+            color: #fff;
+
+        }
+        h1 {
+            width: 100%;
+            text-align: center;
+            background-color: rgba(0, 0, 255,);
+            padding: 10px 0;
+            margin: 10px 0 20px 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            color: black;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+        input[type="submit"] {
+            border: 0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            background-image: linear-gradient(135deg, #f24078 40%, #fc894d);
+            display: flex;
+            flex-direction: column;
+            font-family: "Codec cold",sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            height: 40px;
+            justify-content: center;
+            letter-spacing: .4px;
+            line-height: 1;
+            max-width: 50%;
+            padding: 0 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+            user-select: none;
+            -webkit-user-select: none;
+            border-radius: 20px;
+            touch-action: manipulation;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            margin: auto;
+            transition: background 0.3s, transform 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-image: linear-gradient(135deg, #fc894d  40%,#f24078);
+            transform: translateY(-2px);
+        }
+        input[type="submit"]:active {
+            transform: translateY(1px);
+        }
+        .signup-link, .login-link {
+            margin-top: 20px;
+        }
+        .signup-link a, .login-link a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .signup-link a:hover, .login-link a:hover {
+            color: #0056b3;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            color:#ff0000;
+        }
+        .message:empty {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome to Blue Bus</h1>
+<div class="container">
+    <div class="message" th:if="${message != null}">
+        [[${message}]]
+    </div>
+    <h2>Registration Form</h2>
+    <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your Full Name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <input type="submit" value="Register">
+    </form>
+    <div class="login-link">
+        <p style="color: #323232;">Already have an account? <a th:href="@{/login}">Sign in here</a></p>
+    </div>
+</div>
+</body>
+</html>

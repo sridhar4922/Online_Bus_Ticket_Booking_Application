@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Abril Fatface', sans-serif;
+            color: white;
+            background-image: linear-gradient(135deg, #f24078 40%, #fc894d)no-repeat center center fixed;
+            background-repeat: no-repeat;
+            background-size:cover ;
+            height: 100%;
+            margin-bottom: 50%;
+        }
+        
+
+        .header {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: "Abril Fatface", serif;
+            font-weight: 400;
+            font-style:oblique;
+            font-size: 30px;
+            color:#ffffff;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .logout-button {
+            background-color: #fff;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border: 0 solid #e2e8f0;
+            border-radius: 1.5rem;
+            box-sizing: border-box;
+            color: #0d172a;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1;
+            padding: 1rem 1.6rem;
+            text-align: center;
+            text-decoration: none #0d172a solid;
+            text-decoration-thickness: auto;
+            transition: all .1s cubic-bezier(.4, 0, .2, 1);
+            box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .logout-button:hover {
+            background-color: #1e293b;
+            color: #fff;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 10px;
+        }
+
+        nav ul li a {
+            align-items: center;
+            background-image: linear-gradient(135deg, #f24078 40%, #fc894d);
+            border: 0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            font-family: "Codec cold",sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            height: 54px;
+            justify-content: center;
+            letter-spacing: .4px;
+            line-height: 1;
+            max-width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 3px;
+            text-decoration: none;
+            text-transform: uppercase;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+        }
+
+        nav ul li a:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            color: #2c3e50;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color:rgb(255, 255, 255);
+            opacity: 0.9;
+            align-items: center;
+            justify-content: center;
+        }
+
+        p{
+            font-family:'Courier New', Courier, monospace;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 5%;
+        }
+
+        h2 {
+            font-family: "Abril Fatface", serif;
+            font-weight: 400;
+            font-style:oblique;
+            font-size: 25px;
+            color:#f34079;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>ADMIN Dashboard</h1>
+    <span sec:authorize="isAuthenticated">
+    <a th:href="@{/logout}">
+      <button class="logout-button">Logout</button>
+    </a>
+  </span>
+</div>
+
+<div class="container">
+    <h2>Blue Bus Booking welcomes you..!! <span th:text="${passenger.fullName}"></span></h2>
+    <nav>
+        <ul>
+            <li><a href="/addBus">Add Bus</a></li>
+            <li><a href="/viewAllBuses">View Bus</a></li>
+            <li><a href="/findBusById">View Bus By ID</a></li>
+        </ul>
+    </nav>
+</div>
+
+<p>Your Journey, Just a Click Away! Book Bus Tickets Effortlessly with Our Easy-to-Use App.</p>
+
+<footer>
+    <p style="font-family: 'Times New Roman', Times, serif; text-align: center; margin-top: 18%; ">&copy; 2024 Blue Bus. All rights reserved.</p>
+</footer>
+</body>
+</html>

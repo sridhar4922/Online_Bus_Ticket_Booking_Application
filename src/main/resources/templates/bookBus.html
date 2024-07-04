@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Bus</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Abril Fatface, sans-serif;
+            font-size:medium;
+            color: #323232;
+            background: linear-gradient(135deg, #f24078 40%, #fc894d)no-repeat center center fixed;
+        }
+
+        header{
+            color: #ffffff;
+            width: 100%;
+            margin: 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: "Abril Fatface", serif;
+            font-weight: 400;
+            font-style:oblique;
+            font-size: 30px;
+            color:#ffffff;
+            justify-content: center;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 90%;
+            max-width: 1200px;
+            padding: 10px;
+            justify-content: space-between;
+            align-items: center;
+            font-family: "Bona Nova SC", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .bus-details, .booking-form {
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            vertical-align: top;
+        }
+        .bus-details {
+            width: 45%;
+            display: inline-block;
+        }
+        .booking-form {
+            width: 45%;
+            display: inline-block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 80%;
+            padding: 6px;
+            margin-bottom: 1px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            
+        }
+        button {
+            border: 0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            background-image: linear-gradient(135deg, #f24078 40%, #fc894d);
+            display: flex;
+            flex-direction: column;
+            font-family: "Codec cold",sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            height: 40px;
+            justify-content: center;
+            letter-spacing: .4px;
+            line-height: 1;
+            max-width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 3px;
+            text-decoration: none;
+            text-transform: uppercase;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #fc894d  40%,#f24078);
+        }
+        .home-button {
+            background-color: #fff;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border: 0 solid #e2e8f0;
+            border-radius: 1.5rem;
+            box-sizing: border-box;
+            color: #0d172a;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1;
+            padding: 1rem 1.6rem;
+            text-align: center;
+            text-decoration: none #0d172a solid;
+            text-decoration-thickness: auto;
+            transition: all .1s cubic-bezier(.4, 0, .2, 1);
+            box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+        .home-button:hover {
+            background-color: #1e293b;
+            color: #fff;
+        }
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .bus-details, .booking-form {
+                width: 100%;
+            }
+            .bus-details{
+                width: 70%;
+            }
+            .booking-form{
+                width: 70%;
+            }
+        }
+    </style>
+    <script>
+        let passengerCount = 1;
+
+ function addPassenger() {
+     passengerCount++;
+
+     var container = document.getElementById("passengerDetails");
+
+     var passengerDiv = document.createElement("div");
+     passengerDiv.innerHTML = `
+         <h3>Passenger ${passengerCount}</h3>
+         <div class="form-group">
+             <label for="travelPassengerName_${passengerCount}">Passenger Name:</label>
+             <input type="text" id="travelPassengerName_${passengerCount}" name="travelPassengerName" />
+         </div>
+         <div class="form-group">
+             <label for="travelPassengerGender_${passengerCount}">Passenger Gender:</label>
+             <select id="travelPassengerGender_${passengerCount}" name="travelPassengerGender">
+                 <option value="Male">Male</option>
+                 <option value="Female">Female</option>
+                 <option value="Other">Other</option>
+             </select>
+         </div>
+         <div class="form-group">
+             <label for="travelPassengerAge_${passengerCount}">Passenger Age:</label>
+             <input type="number" id="travelPassengerAge_${passengerCount}" name="travelPassengerAge" />
+         </div>
+         <div class="form-group">
+             <label for="seatPreference_${passengerCount}">Seat Preference:</label>
+             <select id="seatPreference_${passengerCount}" name="seatPreference">
+                 <option value="Window">Window</option>
+                 <option value="Aisle">Aisle</option>
+             </select>
+         </div>
+     `;
+     container.appendChild(passengerDiv);
+ }
+
+    </script>
+</head>
+<body>
+<header>
+    <h1>Book Bus</h1>
+</header>
+
+<p  > Your Journey, Just a Click Away! Book Bus Tickets Effortlessly with Our Easy-to-Use App.</p>
+
+<div class="container">
+    <div class="bus-details">
+        <p>Bus Name: <span th:text="${bus.busName}"></span></p>
+        <p>From: <span th:text="${bus.from}"></span></p>
+       
+        <p>To: <span th:text="${bus.to}"></span></p>
+       
+        <p>Date of Journey: <span th:text="${bus.checkingDate}"></span></p>
+        
+        <p>Departure Time: <span th:text="${bus.departureTime}"></span></p>
+       
+        <p>Arrival Time: <span th:text="${bus.arrivalTime}"></span></p>
+        
+        <p>Ticket Fare: <span th:text="${bus.ticketFar}"></span></p>
+    </div>
+    <div class="booking-form">
+        <form action="/saveBooking" method="post">
+            <input type="hidden" name="_csrf.parameterName" value="_csrf.token" />
+            <input type="hidden" name="busId" th:value="${bus.busId}" />
+            <input type="hidden" name="passengerId" th:value="${passengers.passengerId}" />
+
+            <div class="form-group">
+                <label for="noOfPassengers">No of Passengers</label>
+                <input type="text" id="noOfPassengers" name="noOfPassengers" />
+            </div>
+
+            <div id="passengerDetails">
+                <div class="form-group">
+                    <label for="travelPassengerName_1">Passenger Name</label>
+                    <input type="text" id="travelPassengerName_1" name="travelPassengerName" />
+                </div>
+                <div class="form-group">
+                    <label for="travelPassengerGender_1">Passenger Gender</label>
+                    <select id="travelPassengerGender_1" name="travelPassengerGender">
+                        <option value="Select">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Transgender</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="travelPassengerAge_1">Passenger Age</label>
+                    <input type="number" id="travelPassengerAge_1" name="travelPassengerAge" />
+                </div>
+                <div class="form-group">
+                    <label for="seatPreference_1">Seat Preference</label>
+                    <select id="seatPreference_1" name="seatPreference">
+                        <option value="Select">Select Seat Preference</option>
+                        <option value="window">Window</option>
+                        <option value="Aisle">Aisle</option>
+                        <option value="LowerBerth">Lower Berth</option>
+                        <option value="UpperBerth">Upper Berth</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Add Passenger Button -->
+            <button type="button" onclick="addPassenger()">Add Passenger</button>
+            <br><br>
+            <!-- Payment Mode -->
+            <div class="form-group">
+                <label for="paymentMode">Payment Mode</label>
+                <select id="paymentMode" name="paymentMode">
+                    <option value="Credit Card">Credit card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="Online">UPI</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" style="margin:auto 35%;">Book</button>
+        </form>
+    </div>
+</div>
+<div class="center">
+    <a href="/user" class="home-button">Home</a>
+</div>
+
+<footer>
+    <p style="font-family: 'Times New Roman', Times, serif; text-align: center;display: inline-block;">&copy; 2024 Blue Bus. All rights reserved.</p>
+</footer>
+</body>
+</html>
